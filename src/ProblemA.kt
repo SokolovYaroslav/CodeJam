@@ -12,29 +12,27 @@ class ProblemA(inputPath: String, outputPath: String) : Problem(inputPath, outpu
             lines[i - 1] = ArrayList(string[0].map {c: Char -> charConvert(c)})
             K[i - 1] = string[1].toInt()
         }
-        print(solve())
+        solve()
     }
 
-    private fun solve(): Array<Int> {
-        val solutions = Array(T, {0})
-
+    private fun solve() {
         for (i in 0..T - 1) {
+            var solution = 0
             try {
                 for (j in 0..lines[i].size - 1) {
                     if (!lines[i][j]) {
                         for (k in j..j + K[i] - 1) {
                             lines[i][k] = changeBool(lines[i][k])
                         }
-                        solutions[i]++
+                        solution++
                     }
                 }
+                printLine(i + 1, solution)
             }
             catch (e: java.lang.IndexOutOfBoundsException) {
-                solutions[i] = -1
+                printLine(i + 1, null)
             }
         }
-
-        return solutions
     }
 
     private fun charConvert(ch: Char): Boolean {
@@ -54,9 +52,7 @@ class ProblemA(inputPath: String, outputPath: String) : Problem(inputPath, outpu
         return true
     }
 
-    private fun print(solutions: Array<Int>) {
-        for (i in 0..T - 1) {
-            out.println("Case #${i + 1}: ${if (solutions[i] < 0) "IMPOSSIBLE" else solutions[i]}")
-        }
+    private fun printLine(numberOfCase: Int, solution: Int?) {
+            out.println("Case #${numberOfCase}: ${if (solution == null) "IMPOSSIBLE" else solution}")
     }
 }
