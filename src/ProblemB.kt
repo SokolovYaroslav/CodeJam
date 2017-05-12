@@ -22,11 +22,13 @@ class ProblemB(inputPath: String, outputPath: String) : Problem(inputPath, outpu
             }
             else {
                 for (j in firstWrongDigit - 1 downTo 0) {
+                    //try borrow from previous digit
                     if (j == 0 || lines[i][j] > lines[i][j - 1]) {
                         lines[i][j]--
                         for (k in j + 1..lines[i].size - 1) {
                             lines[i][k] = '9'
                         }
+                        //delete leading zero
                         if (lines[i][0] == '0') {
                             lines[i].remove('0')
                         }
@@ -37,12 +39,6 @@ class ProblemB(inputPath: String, outputPath: String) : Problem(inputPath, outpu
             }
         }
     }
-
-//    private fun decrease(ch: Char): Char {
-//        val int = ch.toInt()
-//        if (int > 0) return (int - 1).toChar()
-//        return '0'
-//    }
 
     private fun findFirstWrongDigit(line: ArrayList<Char>): Int? {
         for (i in 1..line.size - 1) {
