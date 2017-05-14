@@ -31,7 +31,7 @@ class ProblemA(inputPath: String, outputPath: String) : Problem(inputPath, outpu
                 for (j in 0..line.size - 1) {
                     if (!line[j]) {
                         for (k in j..j + K - 1) {
-                            line[k] = changeBool(line[k])
+                            line[k] = !line[k]
                         }
                         flipsCounter++
                     }
@@ -42,13 +42,6 @@ class ProblemA(inputPath: String, outputPath: String) : Problem(inputPath, outpu
                 //impossible case
                 printCase(null)
             }
-        }
-
-        private fun changeBool(bool: Boolean): Boolean {
-            if (bool) {
-                return false
-            }
-            return true
         }
 
         private fun charToBool(ch: Char): Boolean {
@@ -62,8 +55,8 @@ class ProblemA(inputPath: String, outputPath: String) : Problem(inputPath, outpu
         }
 
         private fun printCase(flipsCounter: Int?) {
-            out.println("Case #${numberOfCase}: ${if (flipsCounter == null) "IMPOSSIBLE"
-                                                  else flipsCounter}")
+            out.println("Case #${numberOfCase}: " +
+                    "${if (flipsCounter == null) "IMPOSSIBLE" else flipsCounter}")
         }
     }
 }
