@@ -1,6 +1,7 @@
 import java.io.File
 import java.io.FileOutputStream
 import java.io.PrintStream
+import java.util.*
 
 /**
  * Created by yaroslav on 09.05.17.
@@ -8,12 +9,14 @@ import java.io.PrintStream
 abstract class Problem(val inputPath: String, val outputPath: String) {
 
     protected val T: Int
-    protected val strings: List<String>
+    protected val input = Scanner(File(inputPath))
     protected val out = PrintStream(FileOutputStream(outputPath))
 
     init {
-        val input = File(inputPath)
-        strings = input.readLines()
-        T = strings[0].toInt()
+        T = input.nextLine().toInt()
     }
+
+    abstract class ProblemCase(protected val numberOfCase: Int,
+                               protected val input: Scanner,
+                               protected val out: PrintStream)
 }

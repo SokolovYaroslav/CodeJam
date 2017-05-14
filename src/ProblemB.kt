@@ -1,55 +1,66 @@
+import java.io.PrintStream
+import java.util.*
+
 /**
  * Created by yas on 11.05.17.
  */
 class ProblemB(inputPath: String, outputPath: String) : Problem(inputPath, outputPath) {
 
-    private val lines = Array<ArrayList<Char>>(T, {ArrayList<Char>()})
-
     init {
-        for (i in 1..T) {
-            lines[i - 1] = ArrayList(strings[i].toList())
+        for (i in 0..T - 1) {
+            Case(i + 1, input, out)
         }
-        solve()
     }
 
-    private fun solve() {
-        mainLoop@ for (i in 0..T - 1) {
-            val firstWrongDigit = findFirstWrongDigit(lines[i])
+    class Case(numberOfCase: Int, input: Scanner, out: PrintStream) :
+            ProblemCase(numberOfCase, input, out) {
+
+        private val number: ArrayList<Char>
+
+        init {
+            number = ArrayList(input.nextLine().toList())
+            solve()
+        }
+
+        private fun solve() {
+            val firstWrongDigit = findFirstWrongDigit(number)
 
             if (firstWrongDigit == null) {
-                printLine(i + 1, lines[i])
-                continue@mainLoop
+                //number already good
+                printCase(number)
+                return
             }
             else {
-                for (j in firstWrongDigit - 1 downTo 0) {
-                    //try borrow from previous digit
-                    if (j == 0 || lines[i][j] > lines[i][j - 1]) {
-                        lines[i][j]--
-                        for (k in j + 1..lines[i].size - 1) {
-                            lines[i][k] = '9'
+                for (i in firstWrongDigit - 1 downTo 0) {
+                    //try borrow from previous digit with saving good order
+                    if (i == 0 || number[i] > number[i - 1]) {
+                        number[i]--
+                        for (j in i + 1..number.size - 1) {
+                            number[j] = '9'
                         }
                         //delete leading zero
-                        if (lines[i][0] == '0') {
-                            lines[i].remove('0')
+                        if (number[0] == '0') {
+                            number.remove('0')
                         }
-                        printLine(i + 1, lines[i])
-                        continue@mainLoop
+                        printCase(number)
+                        return
                     }
                 }
             }
         }
-    }
 
-    private fun findFirstWrongDigit(line: ArrayList<Char>): Int? {
-        for (i in 1..line.size - 1) {
-            if (line[i] < line[i - 1]) {
-                return i
+        //find first digit with breaking order
+        private fun findFirstWrongDigit(line: ArrayList<Char>): Int? {
+            for (i in 1..line.size - 1) {
+                if (line[i] < line[i - 1]) {
+                    return i
+                }
             }
+            return null
         }
-        return null
-    }
 
-    private fun printLine(numberOfCase: Int, solution: ArrayList<Char>) {
+        private fun printCase(solution: ArrayList<Char>) {
             out.println("Case #${numberOfCase}: ${String(solution.toCharArray())}")
+        }
     }
 }
