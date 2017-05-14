@@ -9,4 +9,6 @@ public fun main(args: Array<String>) {
     ProblemC("InputFiles/C-small-practice-1.in", "OutputFiles/C-small-practice-1.in")
     ProblemC("InputFiles/C-small-practice-2.in", "OutputFiles/C-small-practice-2.in")
     ProblemC("InputFiles/C-large-practice.in", "OutputFiles/C-large-practice.in")
+    ProblemD("InputFiles/D-small-practice.in", "OutputFiles/D-small-practice.in")
+    ProblemD("InputFiles/D-large-practice.in", "OutputFiles/D-large-practice.in")
 }
