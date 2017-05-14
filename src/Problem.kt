@@ -4,8 +4,8 @@ import java.io.PrintStream
 import java.util.*
 
 /**
- * Created by yaroslav on 09.05.17.
- */
+* Created by Yaroslav Sokolov on 09.05.17.
+*/
 abstract class Problem(val inputPath: String, val outputPath: String) {
 
     protected val T: Int

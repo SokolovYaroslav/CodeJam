@@ -2,8 +2,8 @@ import java.io.PrintStream
 import java.util.*
 
 /**
- * Created by yas on 12.05.17.
- */
+* Created by Yaroslav Sokolov on 12.05.17.
+*/
 class ProblemC(inputPath: String, outputPath: String) : Problem(inputPath, outputPath) {
 
     init {
